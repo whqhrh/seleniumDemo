@@ -6,7 +6,7 @@ from selenium import webdriver
 
 class Fixture:
     def setup(self):
-        browser = os.getenv()
+        browser = os.getenv("browser")
         if browser == 'chrome':
             self.driver = webdriver.Chrome()
         elif browser == 'firefox':
