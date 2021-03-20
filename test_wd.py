@@ -16,10 +16,25 @@ class TestWindow():
     def test_window_frame(self):
         self.driver.get('http://www.baidu.com')
         self.driver.find_element_by_css_selector('#s-top-loginbtn').click()
+        # 打印当前窗口
         print(self.driver.current_window_handle)
         sleep(3)
-        self.driver.find_element_by_css_selector('#passport-login-pop-dialog > div > div > div > div.tang-pass-footerBar > a').click()
+        self.driver.find_element_by_css_selector(
+            '#passport-login-pop-dialog > div > div > div > div.tang-pass-footerBar > a').click()
         sleep(3)
+        # 打印当前窗口
         print(self.driver.current_window_handle)
-        print(self.driver.window_handles)
+        # 获取所有窗口list
+        window = self.driver.window_handles
+        print(window)
+        # 切换到注册窗口
+        self.driver.switch_to.window(window[-1])
+        self.driver.find_element_by_css_selector('#TANGRAM__PSP_4__userName').send_keys('17301370015')
+        sleep(3)
 
+        # 切回登录窗口
+        self.driver.switch_to.window(window[0])
+        self.driver.find_element_by_css_selector('#TANGRAM__PSP_11__footerULoginBtn').click()
+        sleep(3)
+        self.driver.find_element_by_css_selector('#TANGRAM__PSP_11__userName').send_keys('17301370015')
+        sleep(5)
